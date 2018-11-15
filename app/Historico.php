@@ -8,11 +8,10 @@ class Historico extends Model
 {
     protected $fillable = [
         'data',
-        'hora',
-        'habito_id'
+        'hora'
     ];
 
-    public function habito() {
-        return $this->belongsTo('App\Habito');
+    public function historico_habitos() {
+        return $this->hasMany('App\HistoricoHabitos');
     }
 }

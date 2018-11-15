@@ -7,9 +7,9 @@
             <table class="table table-stripped table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>Hábito</th>
                         <th>Data</th>
                         <th>Hora</th>
+                        <th>Hábitos</th>
                         <th>Ação</th>
                     </tr>
 
@@ -19,13 +19,23 @@
                     <tr>
                         <td>{{ $hist->data }}</td>
                         <td>{{ $hist->hora }}</td>
+                        <td>@foreach($hist->historico_habitos as $hab)
+                            <ul>
+                                <li>{{ $hab->habito->nome }}</li>
+                            </ul>
+                            @endforeach
+                        </td>
                         <td>
-                        <a href="{{ route('historicos.edit', ['id' => $hist->id]) }}" class="btn-sm btn-success">Editar</a>
-                        <a href="{{ route('historicos.destroy', ['id' => $hist->id]) }}" class="btn-sm btn-danger">Remover</a>
+                            <a href="{{ route('historicos.edit', ['id' => $hist->id]) }}" class="btn-sm btn-success">Editar</a>
+                            <a href="#" onclick="return ConfirmaExclusao({{$hist->id}})" class="btn-sm btn-danger">Remover</a>
                         </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
     </div>
+@endsection
+
+@section('table-delete')
+    "historicos"
 @endsection

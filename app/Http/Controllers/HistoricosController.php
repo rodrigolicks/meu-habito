@@ -19,9 +19,32 @@ class HistoricosController extends Controller
 		return view('historicos.create');
     }
 
+    /*
     public function destroy($id){
         Historico::find($id)->delete();
         return redirect()->route('historicos');
+    }
+    */
+    public function destroy($id){
+        try {
+            HistoricoHabitos::where("historico_id", $id)->delete();
+            Historico::find($id)->delete();
+            $ret = array(
+                'status'    => 'ok',
+                'msg'       => 'null'
+            );
+        } catch(\Illuminate\Database\QueryException $e) {
+            $ret = array(
+                'status'    => 'erro',
+                'msg'       => $e->getMessage()
+            );
+        } catch (\PDOException $e) {
+            $ret = array(
+                'status'    => 'erro',
+                'msg'       => $e->getMessage()
+            );
+        }
+        return $ret;
     }
 
     public function edit($id){
