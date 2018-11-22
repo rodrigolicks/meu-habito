@@ -23,7 +23,9 @@ Route::group(['middleware' => 'auth'], function () {
         //        // Uses Auth Middleware
 //    });
     Route::group(['prefix' => 'habitos', 'where' => ['id' => '[0-9]+']], function() {
-        Route::get('',              ['as' => 'habitos',           'uses' => 'HabitosController@index']);
+        //Route::get('',              ['as' => 'habitos',           'uses' => 'HabitosController@index']);
+        Route::any('',              ['as' => 'habitos',           'uses' => 'HabitosController@index']);
+        Route::get('relatorio',     ['as' => 'habitos.relatorio', 'uses' => 'HabitosController@geraPdf']);
         Route::get('create',        ['as' => 'habitos.create',    'uses' => 'HabitosController@create']);
         Route::get('{id}/destroy',  ['as' => 'habitos.destroy',   'uses' => 'HabitosController@destroy']);
         Route::get('{id}/edit',     ['as' => 'habitos.edit',      'uses' => 'HabitosController@edit']);
